@@ -1,3 +1,4 @@
+import 'package:clima_flutter/screens/city_screens.dart';
 import 'package:clima_flutter/services/weather.dart';
 import 'package:clima_flutter/utilities/constants.dart';
 import 'package:flutter/material.dart';
@@ -32,6 +33,13 @@ class _LocationScreenState extends State<LocationScreen> {
 
   void updateUI(dynamic weatherData) {
     setState(() {
+      if (weatherData == null) {
+        temperature = 0;
+        weatherIcon = 'Error';
+        weatherMessage = 'Unable to get weather data';
+        cityName = '';
+        return;
+      }
       double temp = weatherData['main']['temp'];
       temperature = temp.toInt();
       int condition = weatherData['weather'][0]['id'];
@@ -72,14 +80,26 @@ class _LocationScreenState extends State<LocationScreen> {
                     child: Icon(
                       Icons.near_me,
                       size: 50.0,
+                      color: Colors.white,
                     ),
                   ),
                   TextButton(
-                    onPressed: () {
-                      // Update the UI using setState()
+                    onPressed: () async {
+                      var typedName = await Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) {
+                          return CityScreen();
+                        }),
+                      );
+                      if (typedName != null) {
+                        var weatherData =
+                            await weatherModel.getCityWeather(typedName);
+                        updateUI(weatherData);
+                      }
                     },
                     child: Icon(
                       Icons.location_city,
+                      color: Colors.white,
                       size: 50.0,
                     ),
                   ),
@@ -103,7 +123,10 @@ class _LocationScreenState extends State<LocationScreen> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  '$weatherMessage in $cityName!',
+                  // '$weatherMessage in $cityName!',
+                  (weatherIcon == 'Error')
+                      ? weatherMessage
+                      : '$weatherMessage in $cityName!',
                   textAlign: TextAlign.right,
                   style: kMessageTextStyle,
                 ),

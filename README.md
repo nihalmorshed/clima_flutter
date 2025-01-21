@@ -60,7 +60,7 @@ flutter doctor
 
 2. Clone the repository:
 ```bash
-git clone [repository-url]
+git clone https://github.com/nihalmorshed/clima_flutter.git
 ```
 
 3. Navigate to the project directory:

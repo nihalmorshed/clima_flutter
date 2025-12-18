@@ -20,17 +20,20 @@ A real-time weather application built with Flutter that displays weather conditi
 ### Installation
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/nihalmorshed/clima_flutter.git
    cd clima_flutter
    ```
 
 2. Add your API key in `lib/utilities/constants.dart`:
+
    ```dart
    const apiKey = 'YOUR_API_KEY_HERE';
    ```
 
 3. Install dependencies:
+
    ```bash
    flutter pub get
    ```
@@ -48,11 +51,11 @@ A real-time weather application built with Flutter that displays weather conditi
 
 ## Dependencies
 
-| Package | Purpose |
-|---------|---------|
-| `geolocator` | GPS location services |
-| `http` | API requests |
-| `flutter_spinkit` | Loading animations |
+| Package           | Purpose               |
+| ----------------- | --------------------- |
+| `geolocator`      | GPS location services |
+| `http`            | API requests          |
+| `flutter_spinkit` | Loading animations    |
 
 ## Project Structure
 
@@ -70,10 +73,6 @@ lib/
 └── utilities/
     └── constants.dart        # API config & styles
 ```
-
-## Configuration
-
-For detailed technical documentation, customization options, and modification guides, see [TECHNICAL.md](TECHNICAL.md).
 
 ## License
 
